@@ -19,6 +19,12 @@ require_relative 'dynatrace/network_zones'
 require_relative 'dynatrace/tags'
 require_relative 'dynatrace/tokens'
 require_relative 'dynatrace/releases'
+require_relative 'dynatrace/attacks'
+require_relative 'dynatrace/business_events'
+require_relative 'dynatrace/credentials'
+require_relative 'dynatrace/deployment'
+require_relative 'dynatrace/units'
+require_relative 'dynatrace/geographic_regions'
 
 module Legion
   module Extensions
