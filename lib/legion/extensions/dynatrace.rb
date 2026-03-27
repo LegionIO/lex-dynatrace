@@ -25,6 +25,8 @@ require_relative 'dynatrace/credentials'
 require_relative 'dynatrace/deployment'
 require_relative 'dynatrace/units'
 require_relative 'dynatrace/geographic_regions'
+require_relative 'dynatrace/helpers/paginator'
+require_relative 'dynatrace/client'
 
 module Legion
   module Extensions
