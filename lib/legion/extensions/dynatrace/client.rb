@@ -26,11 +26,15 @@ require_relative 'credentials/runners/credentials'
 require_relative 'deployment/runners/deployment'
 require_relative 'units/runners/units'
 require_relative 'geographic_regions/runners/geographic_regions'
+require_relative 'oneagents/runners/oneagents'
+require_relative 'davis/runners/davis'
+require_relative 'helpers/paginator'
 
 module Legion
   module Extensions
     module Dynatrace
       class Client < BaseClient
+        include Helpers::Paginator
         include Metrics::Runners::Metrics
         include Entities::Runners::Entities
         include Problems::Runners::Problems
@@ -55,6 +59,8 @@ module Legion
         include Deployment::Runners::Deployment
         include Units::Runners::Units
         include GeographicRegions::Runners::GeographicRegions
+        include Oneagents::Runners::Oneagents
+        include Davis::Runners::Davis
       end
     end
   end
