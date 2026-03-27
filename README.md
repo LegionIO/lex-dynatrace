@@ -1,6 +1,6 @@
 # lex-dynatrace
 
-Legion Extension for the [Dynatrace Environment API v2](https://docs.dynatrace.com/docs/dynatrace-api/environment-api). Multi-module monolith covering 16 API areas with standalone clients.
+Legion Extension for the [Dynatrace Environment API v2](https://docs.dynatrace.com/docs/dynatrace-api/environment-api). Multi-module monolith covering 24 API areas with standalone clients.
 
 ## Installation
 
@@ -65,6 +65,37 @@ entities.get_entity(entity_id: 'HOST-ABC123')
 | **Tags** | `/api/v2/tags` | `get_tags`, `add_tags`, `delete_tag` |
 | **Tokens** | `/api/v2/apiTokens` | `list_tokens`, `get_token`, `create_token`, `update_token`, `delete_token`, `lookup_token` |
 | **Releases** | `/api/v2/releases` | `list_releases`, `get_release` |
+| **Attacks** | `/api/v2/attacks` | `list_attacks`, `get_attack` |
+| **BusinessEvents** | `/api/v2/bizevents` | `ingest_business_event`, `ingest_business_events_batch` |
+| **Credentials** | `/api/v2/credentials` | `list_credentials`, `get_credential`, `create_credential`, `update_credential`, `delete_credential` |
+| **Deployment** | `/api/v2/deployment` | `get_agent_installer_metadata`, `get_agent_installer_connection_info`, `get_agent_versions`, `get_activegate_installer_connection_info` |
+| **Units** | `/api/v2/units` | `list_units`, `get_unit`, `convert_units` |
+| **GeographicRegions** | `/api/v2/rum/geographicRegions` | `list_regions`, `list_ip_address_mappings` |
+| **Oneagents** | `/api/v2/oneagents` | `list_oneagents` |
+| **Davis** | `/api/v2/problems` | `get_davis_analysis` (evidence, impact, root cause) |
+
+### Unified Client
+
+Use `Legion::Extensions::Dynatrace::Client` to access all runners from a single instance:
+
+```ruby
+dt = Legion::Extensions::Dynatrace::Client.new(
+  environment_url: 'https://abc12345.live.dynatrace.com',
+  api_token: 'dt0c01.xxxx'
+)
+dt.list_problems(from: 'now-1h')
+dt.query(metric_selector: 'builtin:host.cpu.usage')
+dt.list_entities(entity_selector: 'type(SERVICE)')
+```
+
+### Pagination Helper
+
+The unified client includes a `paginate` helper for auto-paging:
+
+```ruby
+all_entities = dt.paginate(:list_entities, result_key: 'entities',
+                           entity_selector: 'type(HOST)')
+```
 
 ## Legion Settings
 
@@ -83,7 +114,7 @@ When running inside the Legion framework, credentials resolve from settings:
 
 ```bash
 bundle install
-bundle exec rspec       # 66 specs
+bundle exec rspec       # 93 specs
 bundle exec rubocop     # 0 offenses
 ```
 
