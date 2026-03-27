@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0] - 2026-03-27
+
+### Added
+- ActiveGate Tokens: list/get/create/revoke (`/api/v2/activeGateTokens`)
+- Ownership: teams CRUD + validate entity ownership (`/api/v2/ownership`)
+- OTLP: ingest traces, metrics, logs via OpenTelemetry Protocol (`/api/v2/otlp/v1/*`)
+- Extensions20: upload extension zip (multipart)
+- Problems: update/delete comments
+- SecurityProblems: get individual remediation item
+- faraday-multipart dependency for extension upload
+- 31 sub-modules, 129 specs
+
 ## [0.2.0] - 2026-03-27
 
 ### Added

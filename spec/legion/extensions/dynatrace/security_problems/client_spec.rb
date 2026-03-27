@@ -44,4 +44,13 @@ RSpec.describe Legion::Extensions::Dynatrace::SecurityProblems::Client do
       expect(result['remediationItems']).to eq([])
     end
   end
+
+  describe '#get_remediation_item' do
+    it 'gets a remediation item' do
+      stub_dt(:get, 'api/v2/securityProblems/SP-123/remediationItems/RI-1',
+              response: { id: 'RI-1', vulnerableComponent: 'log4j' })
+      result = client.get_remediation_item(security_problem_id: 'SP-123', remediation_id: 'RI-1')
+      expect(result['id']).to eq('RI-1')
+    end
+  end
 end

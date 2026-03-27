@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'tempfile'
 
 RSpec.describe Legion::Extensions::Dynatrace::Extensions20::Client do
   subject(:client) { described_class.new(environment_url: 'https://test.live.dynatrace.com', api_token: 'dt0c01.test') }
@@ -55,6 +56,22 @@ RSpec.describe Legion::Extensions::Dynatrace::Extensions20::Client do
       stub_dt(:delete, 'api/v2/extensions/com.dynatrace.extension.host', response: {})
       result = client.delete_extension(extension_name: 'com.dynatrace.extension.host')
       expect(result).to eq({})
+    end
+  end
+
+  describe '#upload_extension' do
+    it 'uploads an extension zip' do
+      stub_request(:post, 'https://test.live.dynatrace.com/api/v2/extensions')
+        .to_return(status: 200, body: { extensionName: 'custom:my.ext', version: '1.0.0' }.to_json,
+                   headers: { 'Content-Type' => 'application/json' })
+      file = Tempfile.new(['ext', '.zip'])
+      file.write('PK')
+      file.rewind
+      result = client.upload_extension(file_path: file.path)
+      expect(result['extensionName']).to eq('custom:my.ext')
+    ensure
+      file&.close
+      file&.unlink
     end
   end
 end

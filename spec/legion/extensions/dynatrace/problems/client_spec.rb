@@ -44,4 +44,20 @@ RSpec.describe Legion::Extensions::Dynatrace::Problems::Client do
       expect(result['id']).to eq('C-1')
     end
   end
+
+  describe '#update_comment' do
+    it 'updates a comment' do
+      stub_dt(:put, 'api/v2/problems/P-123/comments/C-1', response: { id: 'C-1', message: 'updated' })
+      result = client.update_comment(problem_id: 'P-123', comment_id: 'C-1', message: 'updated')
+      expect(result['message']).to eq('updated')
+    end
+  end
+
+  describe '#delete_comment' do
+    it 'deletes a comment' do
+      stub_dt(:delete, 'api/v2/problems/P-123/comments/C-1', response: '', status: 204)
+      result = client.delete_comment(problem_id: 'P-123', comment_id: 'C-1')
+      expect(result).to be_nil
+    end
+  end
 end

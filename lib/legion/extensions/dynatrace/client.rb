@@ -32,6 +32,9 @@ require_relative 'hub/runners/hub'
 require_relative 'open_pipeline/runners/open_pipeline'
 require_relative 'documents/runners/documents'
 require_relative 'dql/runners/dql'
+require_relative 'activegate_tokens/runners/activegate_tokens'
+require_relative 'ownership/runners/ownership'
+require_relative 'otlp/runners/otlp'
 require_relative 'helpers/paginator'
 
 module Legion
@@ -69,6 +72,9 @@ module Legion
         include OpenPipeline::Runners::OpenPipeline
         include Documents::Runners::Documents
         include Dql::Runners::Dql
+        include ActivegateTokens::Runners::ActivegateTokens
+        include Ownership::Runners::Ownership
+        include Otlp::Runners::Otlp
       end
     end
   end

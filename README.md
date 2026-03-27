@@ -1,6 +1,6 @@
 # lex-dynatrace
 
-Legion Extension for the [Dynatrace Environment API v2](https://docs.dynatrace.com/docs/dynatrace-api/environment-api). Multi-module monolith covering 28 API areas with standalone clients.
+Legion Extension for the [Dynatrace Environment API v2](https://docs.dynatrace.com/docs/dynatrace-api/environment-api). Multi-module monolith covering 31 API areas with standalone clients.
 
 ## Installation
 
@@ -51,15 +51,15 @@ entities.get_entity(entity_id: 'HOST-ABC123')
 |--------|----------|---------|
 | **Metrics** | `/api/v2/metrics` | `list_descriptors`, `get_descriptor`, `query`, `ingest` |
 | **Entities** | `/api/v2/entities` | `list_entities`, `get_entity`, `list_entity_types`, `get_entity_type`, `push_custom_device` |
-| **Problems** | `/api/v2/problems` | `list_problems`, `get_problem`, `close_problem`, `list_comments`, `create_comment` |
+| **Problems** | `/api/v2/problems` | `list_problems`, `get_problem`, `close_problem`, `list_comments`, `create_comment`, `update_comment`, `delete_comment` |
 | **Events** | `/api/v2/events` | `list_events`, `get_event`, `ingest_event` |
 | **Logs** | `/api/v2/logs` | `search_logs`, `aggregate_logs` |
 | **AuditLogs** | `/api/v2/auditlogs` | `list_audit_logs`, `get_audit_log` |
 | **ActiveGates** | `/api/v2/activeGates` | `list_active_gates`, `get_active_gate`, `list_update_jobs`, `get_update_job`, `create_update_job`, `delete_update_job`, `get_auto_update_config`, `update_auto_update_config` |
-| **Extensions20** | `/api/v2/extensions` | `list_extensions`, `get_extension`, `delete_extension`, `get_extension_version`, `delete_extension_version`, `get_environment_config`, `update_environment_config`, `delete_environment_config`, `list_monitoring_configs`, `get_monitoring_config`, `create_monitoring_config`, `update_monitoring_config`, `delete_monitoring_config` |
+| **Extensions20** | `/api/v2/extensions` | `list_extensions`, `get_extension`, `delete_extension`, `get_extension_version`, `delete_extension_version`, `upload_extension`, `get_environment_config`, `update_environment_config`, `delete_environment_config`, `list_monitoring_configs`, `get_monitoring_config`, `create_monitoring_config`, `update_monitoring_config`, `delete_monitoring_config` |
 | **Slos** | `/api/v2/slo` | `list_slos`, `get_slo`, `create_slo`, `update_slo`, `delete_slo` |
 | **Synthetic** | `/api/v2/synthetic` | `list_monitors`, `get_monitor`, `create_monitor`, `update_monitor`, `delete_monitor`, `get_execution`, `trigger_on_demand`, `list_locations`, `get_location` |
-| **SecurityProblems** | `/api/v2/securityProblems` | `list_security_problems`, `get_security_problem`, `mute_security_problem`, `unmute_security_problem`, `list_remediations` |
+| **SecurityProblems** | `/api/v2/securityProblems` | `list_security_problems`, `get_security_problem`, `mute_security_problem`, `unmute_security_problem`, `list_remediations`, `get_remediation_item` |
 | **SettingsObjects** | `/api/v2/settings` | `list_objects`, `get_object`, `create_objects`, `update_object`, `delete_object`, `list_schemas`, `get_schema` |
 | **NetworkZones** | `/api/v2/networkZones` | `list_network_zones`, `get_network_zone`, `create_network_zone`, `update_network_zone`, `delete_network_zone` |
 | **Tags** | `/api/v2/tags` | `get_tags`, `add_tags`, `delete_tag` |
@@ -77,6 +77,9 @@ entities.get_entity(entity_id: 'HOST-ABC123')
 | **OpenPipeline** | `/api/v2/openpipeline/configurations` | `list_pipelines`, `get_pipeline`, `update_pipeline` |
 | **Documents** | `/api/v2/documents` | `list_documents`, `get_document`, `create_document`, `update_document`, `delete_document` |
 | **DQL** | `/platform/storage/query/v1/query:execute` | `execute_query` |
+| **ActiveGate Tokens** | `/api/v2/activeGateTokens` | `list_activegate_tokens`, `get_activegate_token`, `create_activegate_token`, `revoke_activegate_token` |
+| **Ownership** | `/api/v2/ownership` | `list_teams`, `get_team`, `create_team`, `update_team`, `delete_team`, `validate_ownership` |
+| **OTLP** | `/api/v2/otlp/v1/*` | `ingest_traces`, `ingest_otlp_metrics`, `ingest_otlp_logs` |
 
 ### Unified Client
 
@@ -118,7 +121,7 @@ When running inside the Legion framework, credentials resolve from settings:
 
 ```bash
 bundle install
-bundle exec rspec       # 113 specs
+bundle exec rspec       # 129 specs
 bundle exec rubocop     # 0 offenses
 ```
 

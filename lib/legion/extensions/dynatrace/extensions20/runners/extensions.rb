@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'faraday/multipart'
+
 module Legion
   module Extensions
     module Dynatrace
@@ -78,6 +80,19 @@ module Legion
             def delete_monitoring_config(extension_name:, configuration_id:, **opts)
               conn = opts[:connection] || connection(**opts)
               conn.delete("api/v2/extensions/#{extension_name}/monitoringConfigurations/#{configuration_id}").body
+            end
+
+            def upload_extension(file_path:, **opts)
+              base = opts[:environment_url] || @opts&.dig(:environment_url)
+              token = opts[:api_token] || @opts&.dig(:api_token)
+              conn = Faraday.new(url: base) do |f|
+                f.request :multipart
+                f.response :json
+                f.headers['Authorization'] = "Api-Token #{token}" if token
+                f.adapter Faraday.default_adapter
+              end
+              payload = { file: Faraday::Multipart::FilePart.new(file_path, 'application/zip') }
+              conn.post('api/v2/extensions', payload).body
             end
           end
         end

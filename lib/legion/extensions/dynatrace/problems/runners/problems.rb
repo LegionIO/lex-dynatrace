@@ -46,6 +46,18 @@ module Legion
               payload[:context] = context if context
               conn.post("api/v2/problems/#{problem_id}/comments", payload).body
             end
+
+            def update_comment(problem_id:, comment_id:, message:, context: nil, **opts)
+              conn = opts[:connection] || connection(**opts)
+              payload = { message: message }
+              payload[:context] = context if context
+              conn.put("api/v2/problems/#{problem_id}/comments/#{comment_id}", payload).body
+            end
+
+            def delete_comment(problem_id:, comment_id:, **opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.delete("api/v2/problems/#{problem_id}/comments/#{comment_id}").body
+            end
           end
         end
       end

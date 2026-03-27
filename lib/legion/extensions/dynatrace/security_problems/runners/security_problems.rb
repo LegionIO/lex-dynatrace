@@ -47,6 +47,11 @@ module Legion
               params[:remediationType] = remediation_type if remediation_type
               conn.get("api/v2/securityProblems/#{security_problem_id}/remediationItems", params).body
             end
+
+            def get_remediation_item(security_problem_id:, remediation_id:, **opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.get("api/v2/securityProblems/#{security_problem_id}/remediationItems/#{remediation_id}").body
+            end
           end
         end
       end
