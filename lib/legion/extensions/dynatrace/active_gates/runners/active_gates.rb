@@ -27,6 +27,36 @@ module Legion
               conn = opts[:connection] || connection(**opts)
               conn.get("api/v2/activeGates/#{ag_id}").body
             end
+
+            def list_update_jobs(ag_id:, **opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.get("api/v2/activeGates/#{ag_id}/updateJobs").body
+            end
+
+            def get_update_job(ag_id:, job_id:, **opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.get("api/v2/activeGates/#{ag_id}/updateJobs/#{job_id}").body
+            end
+
+            def create_update_job(ag_id:, job:, **opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.post("api/v2/activeGates/#{ag_id}/updateJobs", job).body
+            end
+
+            def delete_update_job(ag_id:, job_id:, **opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.delete("api/v2/activeGates/#{ag_id}/updateJobs/#{job_id}").body
+            end
+
+            def get_auto_update_config(**opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.get('api/v2/activeGates/autoUpdate').body
+            end
+
+            def update_auto_update_config(config:, **opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.put('api/v2/activeGates/autoUpdate', config).body
+            end
           end
         end
       end

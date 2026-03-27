@@ -28,6 +28,10 @@ require_relative 'units/runners/units'
 require_relative 'geographic_regions/runners/geographic_regions'
 require_relative 'oneagents/runners/oneagents'
 require_relative 'davis/runners/davis'
+require_relative 'hub/runners/hub'
+require_relative 'open_pipeline/runners/open_pipeline'
+require_relative 'documents/runners/documents'
+require_relative 'dql/runners/dql'
 require_relative 'helpers/paginator'
 
 module Legion
@@ -61,6 +65,10 @@ module Legion
         include GeographicRegions::Runners::GeographicRegions
         include Oneagents::Runners::Oneagents
         include Davis::Runners::Davis
+        include Hub::Runners::Hub
+        include OpenPipeline::Runners::OpenPipeline
+        include Documents::Runners::Documents
+        include Dql::Runners::Dql
       end
     end
   end

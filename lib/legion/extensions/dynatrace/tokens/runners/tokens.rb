@@ -46,6 +46,11 @@ module Legion
               conn = opts[:connection] || connection(**opts)
               conn.post('api/v2/apiTokens/lookup', { token: token }).body
             end
+
+            def get_tenant_token(**opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.get('api/v2/apiTokens/tenantToken').body
+            end
           end
         end
       end

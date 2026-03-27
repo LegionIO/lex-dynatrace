@@ -36,4 +36,13 @@ RSpec.describe Legion::Extensions::Dynatrace::Entities::Client do
       expect(result['type']).to eq('HOST')
     end
   end
+
+  describe '#push_custom_device' do
+    it 'pushes a custom device' do
+      stub_dt(:post, 'api/v2/entities/custom',
+              response: { entityId: 'CUSTOM_DEVICE-123' })
+      result = client.push_custom_device(body: { displayName: 'my-device', type: 'CUSTOM_DEVICE' })
+      expect(result['entityId']).to eq('CUSTOM_DEVICE-123')
+    end
+  end
 end

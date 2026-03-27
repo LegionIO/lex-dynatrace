@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0] - 2026-03-27
+
+### Added
+- Hub: list/get hub items (`/api/v2/hub/items`)
+- OpenPipeline: list/get/update pipeline configurations (`/api/v2/openpipeline/configurations`)
+- Documents: CRUD for Grail documents (`/api/v2/documents`)
+- DQL: execute Dynatrace Query Language queries (`/platform/storage/query/v1/query:execute`)
+- ActiveGates: update jobs (list/get/create/delete), auto-update config (get/update)
+- Entities: push custom device
+- Synthetic: trigger on-demand execution
+- Tokens: get tenant token metadata
+- 28 sub-modules, 113 specs
+
 ## [0.1.0] - 2026-03-27
 
 ### Added

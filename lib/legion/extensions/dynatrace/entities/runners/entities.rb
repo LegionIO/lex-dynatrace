@@ -40,6 +40,11 @@ module Legion
               conn = opts[:connection] || connection(**opts)
               conn.get("api/v2/entityTypes/#{type}").body
             end
+
+            def push_custom_device(body:, **opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.post('api/v2/entities/custom', body).body
+            end
           end
         end
       end

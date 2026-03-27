@@ -52,4 +52,13 @@ RSpec.describe Legion::Extensions::Dynatrace::Synthetic::Client do
       expect(result['executionId']).to eq('EXEC-1')
     end
   end
+
+  describe '#trigger_on_demand' do
+    it 'triggers on-demand execution' do
+      stub_dt(:post, 'api/v2/synthetic/executions',
+              response: { triggered: [{ monitorId: 'MON-123', executionId: 'EXEC-2' }] })
+      result = client.trigger_on_demand(body: { monitors: [{ monitorId: 'MON-123' }] })
+      expect(result['triggered']).to be_an(Array)
+    end
+  end
 end

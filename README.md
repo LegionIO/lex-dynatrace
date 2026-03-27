@@ -1,6 +1,6 @@
 # lex-dynatrace
 
-Legion Extension for the [Dynatrace Environment API v2](https://docs.dynatrace.com/docs/dynatrace-api/environment-api). Multi-module monolith covering 24 API areas with standalone clients.
+Legion Extension for the [Dynatrace Environment API v2](https://docs.dynatrace.com/docs/dynatrace-api/environment-api). Multi-module monolith covering 28 API areas with standalone clients.
 
 ## Installation
 
@@ -50,20 +50,20 @@ entities.get_entity(entity_id: 'HOST-ABC123')
 | Module | API Path | Methods |
 |--------|----------|---------|
 | **Metrics** | `/api/v2/metrics` | `list_descriptors`, `get_descriptor`, `query`, `ingest` |
-| **Entities** | `/api/v2/entities` | `list_entities`, `get_entity`, `list_entity_types`, `get_entity_type` |
+| **Entities** | `/api/v2/entities` | `list_entities`, `get_entity`, `list_entity_types`, `get_entity_type`, `push_custom_device` |
 | **Problems** | `/api/v2/problems` | `list_problems`, `get_problem`, `close_problem`, `list_comments`, `create_comment` |
 | **Events** | `/api/v2/events` | `list_events`, `get_event`, `ingest_event` |
 | **Logs** | `/api/v2/logs` | `search_logs`, `aggregate_logs` |
 | **AuditLogs** | `/api/v2/auditlogs` | `list_audit_logs`, `get_audit_log` |
-| **ActiveGates** | `/api/v2/activeGates` | `list_active_gates`, `get_active_gate` |
+| **ActiveGates** | `/api/v2/activeGates` | `list_active_gates`, `get_active_gate`, `list_update_jobs`, `get_update_job`, `create_update_job`, `delete_update_job`, `get_auto_update_config`, `update_auto_update_config` |
 | **Extensions20** | `/api/v2/extensions` | `list_extensions`, `get_extension`, `delete_extension`, `get_extension_version`, `delete_extension_version`, `get_environment_config`, `update_environment_config`, `delete_environment_config`, `list_monitoring_configs`, `get_monitoring_config`, `create_monitoring_config`, `update_monitoring_config`, `delete_monitoring_config` |
 | **Slos** | `/api/v2/slo` | `list_slos`, `get_slo`, `create_slo`, `update_slo`, `delete_slo` |
-| **Synthetic** | `/api/v2/synthetic` | `list_monitors`, `get_monitor`, `create_monitor`, `update_monitor`, `delete_monitor`, `get_execution`, `list_locations`, `get_location` |
+| **Synthetic** | `/api/v2/synthetic` | `list_monitors`, `get_monitor`, `create_monitor`, `update_monitor`, `delete_monitor`, `get_execution`, `trigger_on_demand`, `list_locations`, `get_location` |
 | **SecurityProblems** | `/api/v2/securityProblems` | `list_security_problems`, `get_security_problem`, `mute_security_problem`, `unmute_security_problem`, `list_remediations` |
 | **SettingsObjects** | `/api/v2/settings` | `list_objects`, `get_object`, `create_objects`, `update_object`, `delete_object`, `list_schemas`, `get_schema` |
 | **NetworkZones** | `/api/v2/networkZones` | `list_network_zones`, `get_network_zone`, `create_network_zone`, `update_network_zone`, `delete_network_zone` |
 | **Tags** | `/api/v2/tags` | `get_tags`, `add_tags`, `delete_tag` |
-| **Tokens** | `/api/v2/apiTokens` | `list_tokens`, `get_token`, `create_token`, `update_token`, `delete_token`, `lookup_token` |
+| **Tokens** | `/api/v2/apiTokens` | `list_tokens`, `get_token`, `create_token`, `update_token`, `delete_token`, `lookup_token`, `get_tenant_token` |
 | **Releases** | `/api/v2/releases` | `list_releases`, `get_release` |
 | **Attacks** | `/api/v2/attacks` | `list_attacks`, `get_attack` |
 | **BusinessEvents** | `/api/v2/bizevents` | `ingest_business_event`, `ingest_business_events_batch` |
@@ -73,6 +73,10 @@ entities.get_entity(entity_id: 'HOST-ABC123')
 | **GeographicRegions** | `/api/v2/rum/geographicRegions` | `list_regions`, `list_ip_address_mappings` |
 | **Oneagents** | `/api/v2/oneagents` | `list_oneagents` |
 | **Davis** | `/api/v2/problems` | `get_davis_analysis` (evidence, impact, root cause) |
+| **Hub** | `/api/v2/hub/items` | `list_hub_items`, `get_hub_item` |
+| **OpenPipeline** | `/api/v2/openpipeline/configurations` | `list_pipelines`, `get_pipeline`, `update_pipeline` |
+| **Documents** | `/api/v2/documents` | `list_documents`, `get_document`, `create_document`, `update_document`, `delete_document` |
+| **DQL** | `/platform/storage/query/v1/query:execute` | `execute_query` |
 
 ### Unified Client
 
@@ -114,7 +118,7 @@ When running inside the Legion framework, credentials resolve from settings:
 
 ```bash
 bundle install
-bundle exec rspec       # 93 specs
+bundle exec rspec       # 113 specs
 bundle exec rubocop     # 0 offenses
 ```
 

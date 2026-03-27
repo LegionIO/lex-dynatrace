@@ -38,6 +38,11 @@ module Legion
               conn = opts[:connection] || connection(**opts)
               conn.get("api/v2/synthetic/executions/#{execution_id}/fullReport").body
             end
+
+            def trigger_on_demand(body:, **opts)
+              conn = opts[:connection] || connection(**opts)
+              conn.post('api/v2/synthetic/executions', body).body
+            end
           end
         end
       end

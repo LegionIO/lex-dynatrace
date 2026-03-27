@@ -44,4 +44,12 @@ RSpec.describe Legion::Extensions::Dynatrace::Tokens::Client do
       expect(result['name']).to eq('My Token')
     end
   end
+
+  describe '#get_tenant_token' do
+    it 'gets the tenant token metadata' do
+      stub_dt(:get, 'api/v2/apiTokens/tenantToken', response: { tenantToken: 'dt0c01.tenant' })
+      result = client.get_tenant_token
+      expect(result['tenantToken']).to eq('dt0c01.tenant')
+    end
+  end
 end
