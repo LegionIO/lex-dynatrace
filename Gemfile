@@ -7,6 +7,7 @@ gemspec
 group :development, :test do
   gem 'rspec', '~> 3.12'
   gem 'rubocop', '~> 1.50'
+  gem 'rubocop-legion'
   gem 'rubocop-rspec', '~> 2.22'
   gem 'simplecov', '~> 0.22'
   gem 'webmock', '~> 3.18'
